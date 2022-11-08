@@ -6,13 +6,21 @@ import Question from "./Question";
 const QuestionList = (props) => {
 
     const [questionsArray, setQuestionsArray] = useState([]);
+    const [gameOver, setGameOver] = useState(false);
+    const [correctAnswers, setCorrectAnswers] = useState("");
+    const [showCheckButton, setShowCheckButton] = useState(false);
+
+    const allAnswered = questionsArray.every(question => question.selectedAnswer !== "");
 
     useEffect(() => {
 		getMyQuestions(props.gameOptions).then(questions => {
 			if (questions.length === 0) {
 				props.handleGameStart();
+                props.setNoQuestions(true);
 				return;
-			}
+			} else {
+                props.setNoQuestions(false)
+            }
             return setQuestionsArray(questions.map(question => {
 				return {
 					...question,
@@ -26,7 +34,7 @@ const QuestionList = (props) => {
 	}, []);
 
     const handleSelect = (id, answer) => {
-		//if (!isGameOver) {
+		if (!gameOver) {
 			setQuestionsArray(prevQuestionsArray => (
 				prevQuestionsArray.map(question => (
 					question.id === id
@@ -34,7 +42,7 @@ const QuestionList = (props) => {
 						: question
 				))
 			));
-		//}
+		}
 	}
 
     const questionElements = questionsArray.map(question => (
@@ -46,16 +54,51 @@ const QuestionList = (props) => {
             incorrect={question.incorrect_answers}
             handleSelect={handleSelect}
 			selectedAnswer={question.selectedAnswer}
-			//showAnswer={question.showAnswer}
+			showAnswer={question.showAnswer}
         />
     ));
 
-    console.log(questionsArray)
+    const checkAnswers = () => {
+        if (allAnswered) {
+            setGameOver(true)
+            
+            setQuestionsArray(prevState => (
+                prevState.map(question => ({...question, showAnswer: true}))
+            ))
+        }
+    }
+
+    useEffect(() => {
+        if (allAnswered && questionsArray.length !== 0){
+            let correctAnswers = 0;
+            questionsArray.forEach(question => {
+                if (question.correct_answer === question.selectedAnswer) correctAnswers++;
+            });
+            setCorrectAnswers(correctAnswers);
+            setShowCheckButton(true);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [questionsArray]);
+
+    const newGame = () => {
+        setShowCheckButton(false);
+        setGameOver(false);
+        props.handleGameStart();
+    }
     
     return(
         <div>
             <h1>Questions</h1>
             {questionElements}
+            <div className='mainButton'>
+                {gameOver && <h4>Your score: {correctAnswers} / 5</h4>}
+                <button 
+                    onClick={gameOver ? newGame : checkAnswers}
+                    className={`answer--original ${showCheckButton ? "button--check" : "button--disabled"}`}
+                >
+                    {gameOver ? "New Game" : "Show Answers"}
+                </button>
+            </div>
         </div>
     )
 }

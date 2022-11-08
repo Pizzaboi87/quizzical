@@ -4,8 +4,9 @@ import QuestionList from './components/QuestionList';
 
 const App = () => {
 
-  const [gameStart, setGameStart] = useState(false)
-  const [chooseIt, setChooseIt] = useState(false)
+  const [gameStart, setGameStart] = useState(false);
+  const [chooseIt, setChooseIt] = useState(false);
+  const [noQuestions, setNoQuestions] = useState(false);
   const [gameOptions, setGameOptions] = useState(
     {
       category: '',
@@ -41,7 +42,7 @@ const App = () => {
 					<QuestionList
 						gameOptions={gameOptions}
 						handleGameStart={handleGameStart}
-						//handleNoQuestionsError={handleNoQuestionsError}
+						setNoQuestions={setNoQuestions}
           />
 				</section>
 
@@ -50,13 +51,11 @@ const App = () => {
         <section className="game--intro">
           <h1 className="game--title">Quizzical Game</h1>
           <p className="game-instruction">Answer the questions to the best of your knowledge!</p>
-
-          {/*	showNoQuestionsError &&
-                <h2 className="noQuestions-text">
-                  Oops! We couldn't find any questions with these options!
-                </h2>
-          */}
-
+          {	noQuestions &&
+                <h4 className="noQuestions-text">
+                  Unfortunately there's no any questions with these options! Sorry :(
+                </h4>
+          }
           <div className="options--container">
             <div className="select--container">
               <label className="label" htmlFor="category">Category:</label>

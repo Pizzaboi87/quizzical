@@ -1,7 +1,23 @@
-.question-btn-selected{
+.answer--original {
+    background-color:beige
+}
+
+.answer--selected {
     background-color: yellow;
 }
 
-.question-btn{
-    background-color:aqua;
+.answer--correct {
+    background-color: green;
+}
+
+.answer--incorrect {
+    background-color: red;
+}
+
+.button--check {
+    background-color: coral;
+}
+
+.button--disabled {
+    cursor: not-allowed;
 }

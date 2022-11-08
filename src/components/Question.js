@@ -4,7 +4,9 @@ import { nanoid } from 'nanoid';
 const Question = (props) => {
 
     let incorrect = props.incorrect.map(answer => {
-        const className = `${props.selectedAnswer === answer ? "question-btn-selected" : "question-btn"}`
+        const className = 
+            `${props.selectedAnswer === answer ? "answer--selected" : "answer--original"}
+             ${(props.showAnswer && props.selectedAnswer === answer) && "answer--incorrect"}`
 
         return(
             <button
@@ -17,7 +19,9 @@ const Question = (props) => {
         )
     });
 
-    const className= `${props.selectedAnswer === props.correct ? "question-btn-selected" : "question-btn"}`
+    const className= 
+        `${props.selectedAnswer === props.correct ? "answer--selected" : "answer--original"}
+         ${props.showAnswer && "answer--correct"}`
     let correct = 
         <button 
             key={nanoid()}
