@@ -37,8 +37,8 @@ const Question = (props) => {
 		a.props.children.localeCompare(b.props.children)));
 
     return(
-        <div>
-            <p>{decode(props.question)}</p>
+        <div className='question--container'>
+            <p className='question'>{decode(props.question)}</p>
             {possibleAnswers}
         </div>
     )

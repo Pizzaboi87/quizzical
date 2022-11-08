@@ -83,18 +83,19 @@ const QuestionList = (props) => {
     const newGame = () => {
         setShowCheckButton(false);
         setGameOver(false);
+        props.setChooseIt(false);
+        props.setNoQuestions(false);
         props.handleGameStart();
     }
     
     return(
-        <div>
-            <h1>Questions</h1>
+        <div className='questionlist--container'>
             {questionElements}
-            <div className='mainButton'>
+            <div className="button--container">
                 {gameOver && <h4>Your score: {correctAnswers} / 5</h4>}
                 <button 
                     onClick={gameOver ? newGame : checkAnswers}
-                    className={`answer--original ${showCheckButton ? "button--check" : "button--disabled"}`}
+                    className={`main--button ${showCheckButton ? "button--check" : "button--disabled"}`}
                 >
                     {gameOver ? "New Game" : "Show Answers"}
                 </button>
