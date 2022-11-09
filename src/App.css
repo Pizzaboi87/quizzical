@@ -197,27 +197,27 @@ main {
 		top: unset;
 		left: unset;
 		transform: none;
-		padding: 2em 1em 0 1em;
-        max-height: 80vh;
+		padding: 0 1em 0 1em;
 	}
 
     .game--intro {
         position: absolute;
-        margin-top: 90%;
+        top: 50%;
+        left: 0;
         transform: translate(0, -50%);
+        margin: 0 5%;
+        text-align: center;
     }
 
     .shape-top {
+        position: fixed;
 		width: 40vw;
 	}
 
 	.shape-bottom {
-		visibility: hidden;
-	}
-
-    .game--intro {
-		padding: 0 1.5em 0 1.5em;
-		height: 85vh;
+        position: fixed;
+        bottom: 0;
+		width: 40vw;
 	}
 
 	.label {
@@ -237,44 +237,17 @@ main {
     .main--button {
         margin-bottom: 10vh;
     }
-}
 
-@media screen and (max-width: 500px) {
-	.questionlist--container {
-		width: 70vw;
-	}
-
-	.button--container > h4 {
-		font-size: 1em;
-		margin-right: 1em;
-	}
-}
-
-@media screen and (max-height: 800px) and (orientation: landscape) {
-	main {
-		position: static;
-		top: unset;
-		left: unset;
-		transform: none;
-		padding: 2em 0;
-		width: 700px;
-		margin-right: auto;
-		margin-left: auto;
-        max-height: 100vh;
-	}
-
-    .shape-bottom {
-		visibility: hidden;
-	}
-
-    .main--button {
-        margin-bottom: 10vh;
+    .button--container {
+        padding-bottom: 10vh;
     }
 
-    .game--intro {
-        position: absolute;
-        top: -50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .button--container > h4 {
+        margin: 0;
+    }
+
+    .main--button {
+        min-width: 150px;
+        margin: 0;
     }
 }

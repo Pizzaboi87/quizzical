@@ -32,8 +32,10 @@ const App = () => {
   }
 
   return (
+    <>
+    <img className="shape-top" src='./shape-top.png' alt="Shape Top" />
     <main>
-      <img className="shape-top" src='./shape-top.png' alt="Shape Top" />
+      
       {
         gameStart
 
@@ -137,8 +139,9 @@ const App = () => {
 
         </section>
       }
-      <img className="shape-bottom" src='./shape-bottom.png' alt="Shape Bottom" />
     </main>
+    <img className="shape-bottom" src='./shape-bottom.png' alt="Shape Bottom" />
+    </>
   );
 }
 
